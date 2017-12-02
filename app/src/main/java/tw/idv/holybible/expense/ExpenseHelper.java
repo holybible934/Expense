@@ -14,14 +14,14 @@ public class ExpenseHelper extends SQLiteOpenHelper {
         super(context, name, factory, version);
     }
 
+    public ExpenseHelper(Context context) {
+        this(context, ExpenseContract.DB_NAME, null, ExpenseContract.DB_VERSION);
+
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String cmd = "CREATE TABLE expense (_id INTEGER PRIMARY KEY, " +
-                "cdate DATETIME NOT NULL, " +
-                "exp_Name VARCHAR, " +
-                "amount INTEGER, " +
-                "CREATE_DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL)";
-        db.execSQL(cmd);
+        db.execSQL(ExpenseContract.CREATE_EXPENSE_TABLE);
     }
 
     @Override
