@@ -1,6 +1,7 @@
 package tw.idv.holybible.expense;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +21,13 @@ public class Main2Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ExpenseHelper helper = new ExpenseHelper(this, "expense.db", null, 1);
-        helper.getReadableDatabase().rawQuery("SELECT 1", null);
+        Cursor cursor = helper.getReadableDatabase().query(ExpenseContract.EXPENSE_TABLE,
+                null, null, null, null, null, null);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new ExpenseAdapter(cursor));
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
