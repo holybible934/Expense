@@ -39,8 +39,4 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
     }
-
-    public void add(View view) {
-
-    }
 }
