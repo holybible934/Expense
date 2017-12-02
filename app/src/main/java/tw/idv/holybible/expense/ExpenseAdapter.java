@@ -53,6 +53,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         public void setModel(Expense expense) {
             dateTextView.setText(expense.getCdate());
             expNameTextView.setText(expense.getExpName());
+            itemView.setTag(expense);
         }
     }
 

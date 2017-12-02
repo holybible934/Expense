@@ -13,6 +13,8 @@ import android.view.View;
 
 public class Main2Activity extends AppCompatActivity {
 
+    private ExpenseHelper helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +22,7 @@ public class Main2Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ExpenseHelper helper = new ExpenseHelper(this, "expense.db", null, 1);
+        helper = new ExpenseHelper(this, "expense.db", null, 1);
         Cursor cursor = helper.getReadableDatabase().query(ExpenseContract.EXPENSE_TABLE,
                 null, null, null, null, null, null);
 
@@ -46,5 +48,14 @@ public class Main2Activity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Cursor cursor = helper.getReadableDatabase().query(ExpenseContract.EXPENSE_TABLE,
+                null, null, null, null, null, null);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setAdapter(new ExpenseAdapter(cursor));
     }
 }
