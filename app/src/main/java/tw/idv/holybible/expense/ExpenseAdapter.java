@@ -30,13 +30,8 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         cursor.moveToPosition(position);
-        int id = cursor.getInt(cursor.getColumnIndex(ExpenseContract.COL_ID));
-        String date = cursor.getString(cursor.getColumnIndex(ExpenseContract.COL_DATE));
-        String expName = cursor.getString(cursor.getColumnIndex(ExpenseContract.COL_EXPENSE_NAME));
-        int amount = cursor.getInt(cursor.getColumnIndex(ExpenseContract.COL_AMOUNT));
-
-        holder.dateTextView.setText(date);
-        holder.expNameTextView.setText(expName);
+        Expense expense = new Expense(cursor);
+        holder.setModel(expense);
     }
 
     @Override
@@ -54,5 +49,12 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
             dateTextView = itemView.findViewById(R.id.row_date);
             expNameTextView = itemView.findViewById(R.id.row_exp_name);
         }
+
+        public void setModel(Expense expense) {
+            dateTextView.setText(expense.getCdate());
+            expNameTextView.setText(expense.getExpName());
+        }
     }
+
+
 }

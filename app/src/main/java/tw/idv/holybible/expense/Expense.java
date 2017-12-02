@@ -1,5 +1,7 @@
 package tw.idv.holybible.expense;
 
+import android.database.Cursor;
+
 /**
  * Created by chchang on 2017/12/2.
  */
@@ -26,6 +28,13 @@ public class Expense {
         this.cdate = cdate;
         this.expName = expName;
         this.amount = amount;
+    }
+
+    public Expense(Cursor cursor) {
+        this.id = cursor.getInt(cursor.getColumnIndex(ExpenseContract.COL_ID));
+        this.cdate = cursor.getString(cursor.getColumnIndex(ExpenseContract.COL_DATE));
+        this.expName = cursor.getString(cursor.getColumnIndex(ExpenseContract.COL_EXPENSE_NAME));
+        this.amount = cursor.getInt(cursor.getColumnIndex(ExpenseContract.COL_AMOUNT));
     }
 
     public int getId() {
