@@ -16,10 +16,10 @@ public class Expense {
 
     /**
      *
-     * @param id
-     * @param cdate
-     * @param expName
-     * @param amount
+     * @param id expense id in SQLite
+     * @param cdate occurred date of the expense
+     * @param expName name of the expense
+     * @param amount amount of the expense
      */
     public Expense(int id, String cdate, String expName, int amount) {
         this.id = id;
