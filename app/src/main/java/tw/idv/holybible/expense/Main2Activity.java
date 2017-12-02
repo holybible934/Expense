@@ -4,10 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -20,6 +21,10 @@ public class Main2Activity extends AppCompatActivity {
 
         ExpenseHelper helper = new ExpenseHelper(this, "expense.db", null, 1);
         helper.getReadableDatabase().rawQuery("SELECT 1", null);
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
