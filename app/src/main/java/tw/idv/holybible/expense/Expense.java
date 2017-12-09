@@ -11,6 +11,7 @@ public class Expense {
     String cdate;
     String expName;
     int amount;
+    boolean agree;
 
     public Expense() {
 
@@ -28,6 +29,7 @@ public class Expense {
         this.cdate = cdate;
         this.expName = expName;
         this.amount = amount;
+        this.agree = false;
     }
 
     public Expense(Cursor cursor) {
@@ -35,6 +37,8 @@ public class Expense {
         this.cdate = cursor.getString(cursor.getColumnIndex(ExpenseContract.COL_DATE));
         this.expName = cursor.getString(cursor.getColumnIndex(ExpenseContract.COL_EXPENSE_NAME));
         this.amount = cursor.getInt(cursor.getColumnIndex(ExpenseContract.COL_AMOUNT));
+        int agreeFlag = cursor.getInt(cursor.getColumnIndex(ExpenseContract.COL_AGREE));
+        this.agree = agreeFlag == 0? false:true;
     }
 
     public int getId() {
@@ -67,5 +71,13 @@ public class Expense {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public boolean isAgree() {
+        return agree;
+    }
+
+    public void setAgree(boolean agree) {
+        this.agree = agree;
     }
 }
