@@ -73,8 +73,9 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
 //        Cursor cursor = helper.getReadableDatabase().query(ExpenseContract.EXPENSE_TABLE,
 //                null, null, null, null, null, null);
         Cursor cursor = getContentResolver().query(
-                ExpenseContract.CONTENT_URI, null, ExpenseContract.COL_ID + " = ?",
-                new String[] { "2" }, null);
+                ExpenseContract.CONTENT_URI, null,  null, //ExpenseContract.COL_ID + " = ?",
+                null, null); //new String[] { "2" }, null);
+
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         ExpenseAdapter adapter = new ExpenseAdapter(cursor);
