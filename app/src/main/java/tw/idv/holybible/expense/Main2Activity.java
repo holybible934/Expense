@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-public class Main2Activity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.OnExpenseClickListener {
 
     private ExpenseHelper helper;
 
@@ -56,6 +56,13 @@ public class Main2Activity extends AppCompatActivity {
         Cursor cursor = helper.getReadableDatabase().query(ExpenseContract.EXPENSE_TABLE,
                 null, null, null, null, null, null);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(new ExpenseAdapter(cursor));
+        ExpenseAdapter adapter = new ExpenseAdapter(cursor);
+        recyclerView.setAdapter(adapter);
+        adapter.setOnExpenseClickListener(this);
+    }
+
+    @Override
+    public void OnClick(int position, Expense expense) {
+
     }
 }

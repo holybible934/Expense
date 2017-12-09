@@ -14,6 +14,12 @@ import android.widget.TextView;
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder> {
 
     private final Cursor cursor;
+    OnExpenseClickListener onExpenseClickListener;
+
+    public void setOnExpenseClickListener(OnExpenseClickListener onExpenseClickListener) {
+        this.onExpenseClickListener = onExpenseClickListener;
+    }
+
 
     public ExpenseAdapter(Cursor cursor) {
         this.cursor = cursor;
@@ -28,10 +34,18 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         cursor.moveToPosition(position);
-        Expense expense = new Expense(cursor);
+        final Expense expense = new Expense(cursor);
         holder.setModel(expense);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onExpenseClickListener != null) {
+                    onExpenseClickListener.OnClick(position,expense);
+                }
+            }
+        });
     }
 
     @Override
@@ -57,5 +71,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         }
     }
 
-
+    public interface OnExpenseClickListener {
+        void OnClick(int position, Expense expense);
+    }
 }
