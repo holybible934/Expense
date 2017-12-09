@@ -67,4 +67,9 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
     public void OnClick(int position, Expense expense) {
         Log.d(TAG, "OnItemClick: " + expense.getExpName() + ", " + expense.getAmount());
     }
+
+    @Override
+    public void OnCheckedChange(View view, Expense expense) {
+        Log.d(TAG, "OnCheckedChange: " + expense.getExpName() + ", " + expense.isAgree());
+    }
 }

@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 /**
@@ -14,7 +16,7 @@ import android.widget.TextView;
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder> {
 
     private final Cursor cursor;
-    OnExpenseClickListener onExpenseClickListener;
+    private OnExpenseClickListener onExpenseClickListener;
 
     public void setOnExpenseClickListener(OnExpenseClickListener onExpenseClickListener) {
         this.onExpenseClickListener = onExpenseClickListener;
@@ -34,7 +36,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         cursor.moveToPosition(position);
         final Expense expense = new Expense(cursor);
         holder.setModel(expense);
@@ -43,6 +45,16 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
             public void onClick(View v) {
                 if (onExpenseClickListener != null) {
                     onExpenseClickListener.OnClick(position, expense);
+                }
+            }
+        });
+        holder.agreeCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                expense.setAgree(isChecked);
+                if (onExpenseClickListener != null) {
+                    onExpenseClickListener.OnCheckedChange(
+                            holder.agreeCheckbox, expense);
                 }
             }
         });
@@ -57,21 +69,26 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
         private final TextView expNameTextView;
         private final TextView dateTextView;
+        private final CheckBox agreeCheckbox;
 
         public ViewHolder(View itemView) {
             super(itemView);
             dateTextView = itemView.findViewById(R.id.row_date);
             expNameTextView = itemView.findViewById(R.id.row_exp_name);
+            agreeCheckbox = itemView.findViewById(R.id.row_agree);
+
         }
 
         public void setModel(Expense expense) {
             dateTextView.setText(expense.getCdate());
             expNameTextView.setText(expense.getExpName());
+            agreeCheckbox.setChecked(expense.isAgree());
             itemView.setTag(expense);
         }
     }
 
     public interface OnExpenseClickListener {
         void OnClick(int position, Expense expense);
+        void OnCheckedChange(View view, Expense expense);
     }
 }
