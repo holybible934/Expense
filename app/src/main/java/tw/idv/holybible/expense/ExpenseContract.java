@@ -13,12 +13,14 @@ public class ExpenseContract {
     public static final String COL_DATE = "cdate";
     public static final String COL_EXPENSE_NAME = "expense_name";
     public static final String COL_AMOUNT = "amount";
+    public static final String COL_AGREE = "agree_flag";
 
     public static final String CREATE_EXPENSE_TABLE =
             "CREATE TABLE "+EXPENSE_TABLE+"( " +
                     COL_ID + " INTEGER PRIMARY KEY, " +
                     COL_DATE + " DATETIME NOT NULL, " +
                     COL_EXPENSE_NAME + " VARCHAR ," +
-                    COL_AMOUNT + " INTEGER )";
+                    COL_AMOUNT + " INTEGER ," +
+                    COL_AGREE + " INTEGER )";
 }
 
