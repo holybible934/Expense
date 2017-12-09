@@ -1,5 +1,6 @@
 package tw.idv.holybible.expense;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 
 /**
@@ -79,5 +80,15 @@ public class Expense {
 
     public void setAgree(boolean agree) {
         this.agree = agree;
+    }
+
+    public ContentValues getContentValues() {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ExpenseContract.COL_ID, id);
+        contentValues.put(ExpenseContract.COL_DATE, cdate);
+        contentValues.put(ExpenseContract.COL_EXPENSE_NAME, expName);
+        contentValues.put(ExpenseContract.COL_AMOUNT, amount);
+        contentValues.put(ExpenseContract.COL_AGREE, agree ? 1: 0);
+        return contentValues;
     }
 }

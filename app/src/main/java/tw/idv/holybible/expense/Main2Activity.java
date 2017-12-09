@@ -71,5 +71,12 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
     @Override
     public void OnCheckedChange(View view, Expense expense) {
         Log.d(TAG, "OnCheckedChange: " + expense.getExpName() + ", " + expense.isAgree());
+        int result = helper.getWritableDatabase().update(
+                ExpenseContract.EXPENSE_TABLE,
+                expense.getContentValues(),
+                ExpenseContract.COL_ID + "= ?",
+                new String[] { String.valueOf(expense.getId()) }
+        );
+        Log.d(TAG, "OnCheckedChange: number of affected rows is " + result);
     }
 }
