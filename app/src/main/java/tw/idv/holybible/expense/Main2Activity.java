@@ -1,9 +1,15 @@
 package tw.idv.holybible.expense;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +18,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import static android.Manifest.permission.PACKAGE_USAGE_STATS;
+import static android.Manifest.permission.READ_CONTACTS;
+
 public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.OnExpenseClickListener {
 
     private static final String TAG = Main2Activity.class.getSimpleName();
+    private static final int REQUEST_PERMISSION_CONTACTS = 19;
     private ExpenseHelper helper;
 
     @Override
@@ -32,6 +42,13 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new ExpenseAdapter(cursor));
+
+        if (ActivityCompat.checkSelfPermission(this, READ_CONTACTS) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[] { READ_CONTACTS}, REQUEST_PERMISSION_CONTACTS);
+        }
+        else {
+            readContacts();
+        }
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -78,5 +95,18 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
                 new String[] { String.valueOf(expense.getId()) }
         );
         Log.d(TAG, "OnCheckedChange: number of affected rows is " + result);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permission, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permission, grantResults);
+        if ((requestCode == REQUEST_PERMISSION_CONTACTS) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+            readContacts();
+        }
+    }
+
+    private void readContacts() {
+        Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
+                null, null, null, null);
     }
 }
