@@ -8,11 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.OnExpenseClickListener {
 
+    private static final String TAG = Main2Activity.class.getSimpleName();
     private ExpenseHelper helper;
 
     @Override
@@ -63,6 +65,6 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
 
     @Override
     public void OnClick(int position, Expense expense) {
-
+        Log.d(TAG, "OnItemClick: " + expense.getExpName() + ", " + expense.getAmount());
     }
 }
