@@ -1,5 +1,6 @@
 package tw.idv.holybible.expense;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -69,8 +70,12 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
     @Override
     protected void onStart() {
         super.onStart();
-        Cursor cursor = helper.getReadableDatabase().query(ExpenseContract.EXPENSE_TABLE,
-                null, null, null, null, null, null);
+//        Cursor cursor = helper.getReadableDatabase().query(ExpenseContract.EXPENSE_TABLE,
+//                null, null, null, null, null, null);
+        Cursor cursor = getContentResolver().query(
+                ExpenseContract.CONTENT_URI, null, ExpenseContract.COL_ID + " = ?",
+                new String[] { "2" }, null);
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         ExpenseAdapter adapter = new ExpenseAdapter(cursor);
         recyclerView.setAdapter(adapter);
