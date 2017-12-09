@@ -72,6 +72,10 @@ public class ExpenseProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+        long id = helper.getWritableDatabase().insert(ExpenseContract.EXPENSE_TABLE, null, values);
+        if (id != -1) {
+            return ContentUris.withAppendedId(ExpenseContract.CONTENT_URI, id);
+        }
         return null;
     }
 

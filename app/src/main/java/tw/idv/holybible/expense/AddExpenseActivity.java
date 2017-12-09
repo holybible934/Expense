@@ -1,6 +1,7 @@
 package tw.idv.holybible.expense;
 
 import android.content.ContentValues;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,18 +49,20 @@ public class AddExpenseActivity extends AppCompatActivity {
 
         ExpenseHelper expenseHelper = new ExpenseHelper(this);
         ContentValues values = new ContentValues();
-        values.put("cdate", date);
-        values.put("expense_name", expName);
-        values.put("amount", amount);
-        long id = expenseHelper.getWritableDatabase().insert(ExpenseContract.EXPENSE_TABLE, null, values);
-        if (id == -1) {
+        values.put(ExpenseContract.COL_DATE, date);
+        values.put(ExpenseContract.COL_EXPENSE_NAME, expName);
+        values.put(ExpenseContract.COL_AMOUNT, amount);
+        values.put(ExpenseContract.COL_AGREE, 0);
+
+        Uri uri = getContentResolver().insert(ExpenseContract.CONTENT_URI, values);
+        if (uri != null) {
+            Log.d(TAG, "insertData: completed. Uri is " + uri.toString());
+            finish();
+        }
+        else {
             new AlertDialog.Builder(this).setMessage("Adding new expense failed")
                     .setPositiveButton("OK", null)
                     .show();
         }
-        else {
-            finish();
-        }
-
     }
 }
