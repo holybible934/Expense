@@ -1,13 +1,11 @@
 package tw.idv.holybible.expense;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +16,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import static android.Manifest.permission.PACKAGE_USAGE_STATS;
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.OnExpenseClickListener {
