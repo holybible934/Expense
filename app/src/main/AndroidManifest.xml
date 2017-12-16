@@ -25,10 +25,13 @@
             android:name=".ExpenseProvider"
             android:authorities="tw.idv.holybible.expense" />
 
-        <activity android:name=".DetailActivity"
-            android:parentActivityName=".Main2Activity">
+        <activity
+            android:name=".DetailActivity"
+            android:parentActivityName=".Main2Activity"></activity>
 
-        </activity>
+        <service
+            android:name=".ExpenseInsertService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

@@ -54,15 +54,17 @@ public class AddExpenseActivity extends AppCompatActivity {
         values.put(ExpenseContract.COL_AMOUNT, amount);
         values.put(ExpenseContract.COL_AGREE, 0);
 
-        Uri uri = getContentResolver().insert(ExpenseContract.CONTENT_URI, values);
-        if (uri != null) {
-            Log.d(TAG, "insertData: completed. Uri is " + uri.toString());
-            finish();
-        }
-        else {
-            new AlertDialog.Builder(this).setMessage("Adding new expense failed")
-                    .setPositiveButton("OK", null)
-                    .show();
-        }
+        ExpenseInsertService.insert(this, values);
+//
+//        Uri uri = getContentResolver().insert(ExpenseContract.CONTENT_URI, values);
+//        if (uri != null) {
+//            Log.d(TAG, "insertData: completed. Uri is " + uri.toString());
+//            finish();
+//        }
+//        else {
+//            new AlertDialog.Builder(this).setMessage("Adding new expense failed")
+//                    .setPositiveButton("OK", null)
+//                    .show();
+//        }
     }
 }
