@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder> {
 
-    private final Cursor cursor;
+    private Cursor cursor;
     private OnExpenseClickListener onExpenseClickListener;
 
     public void setOnExpenseClickListener(OnExpenseClickListener onExpenseClickListener) {
@@ -60,9 +60,19 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         });
     }
 
+    public void updateCursor(Cursor cursor) {
+        this.cursor = cursor;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
-        return cursor.getCount();
+        if (cursor != null) {
+            return cursor.getCount();
+        }
+        else {
+            return 0;
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

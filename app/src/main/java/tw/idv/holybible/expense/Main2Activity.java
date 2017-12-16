@@ -1,7 +1,9 @@
 package tw.idv.holybible.expense;
 
-import android.content.ContentResolver;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -19,11 +21,13 @@ import android.view.View;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
-public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.OnExpenseClickListener {
+public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.OnExpenseClickListener, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = Main2Activity.class.getSimpleName();
     private static final int REQUEST_PERMISSION_CONTACTS = 19;
     private ExpenseHelper helper;
+    private ExpenseAdapter expenseAdapter;
+    private int recyclerViewID = 199;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +76,16 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
         super.onStart();
 //        Cursor cursor = helper.getReadableDatabase().query(ExpenseContract.EXPENSE_TABLE,
 //                null, null, null, null, null, null);
-        Cursor cursor = getContentResolver().query(
-                ExpenseContract.CONTENT_URI, null,  null, //ExpenseContract.COL_ID + " = ?",
-                null, null); //new String[] { "2" }, null);
-
+//        Cursor cursor = getContentResolver().query(
+//                ExpenseContract.CONTENT_URI, null,  null, //ExpenseContract.COL_ID + " = ?",
+//                null, null); //new String[] { "2" }, null);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        ExpenseAdapter adapter = new ExpenseAdapter(cursor);
-        recyclerView.setAdapter(adapter);
-        adapter.setOnExpenseClickListener(this);
+        expenseAdapter = new ExpenseAdapter(null);
+        getLoaderManager().initLoader(recyclerViewID, null, this);
+
+        recyclerView.setAdapter(expenseAdapter);
+        expenseAdapter.setOnExpenseClickListener(this);
     }
 
     @Override
@@ -114,5 +119,21 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
     private void readContacts() {
         Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, null);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(this, ExpenseContract.CONTENT_URI,
+                null, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        expenseAdapter.updateCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 }
