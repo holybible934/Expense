@@ -2,47 +2,47 @@
   "expenses": [
     {
       "cdate": "2016-11-08",
-      "expName": "Breakfast",
+      "expense_name": "Breakfast",
       "amount": 120
     },
     {
       "cdate": "2016-11-08",
-      "expName": "Lunch",
+      "expense_name": "Lunch",
       "amount": 80
     },
     {
       "cdate": "2016-11-09",
-      "expName": "Parking",
+      "expense_name": "Parking",
       "amount": 40
     },
     {
       "cdate": "2016-11-10",
-      "expName": "Sandwich",
+      "expense_name": "Sandwich",
       "amount": 35
     },
     {
       "cdate": "2016-11-11",
-      "expName": "Gift",
+      "expense_name": "Gift",
       "amount": 1100
     },
     {
       "cdate": "2016-11-13",
-      "expName": "Dinner",
+      "expense_name": "Dinner",
       "amount": 115
     },
     {
       "cdate": "2016-11-13",
-      "expName": "Gas",
+      "expense_name": "Gas",
       "amount": 1120
     },
     {
       "cdate": "2016-11-14",
-      "expName": "Lunch",
+      "expense_name": "Lunch",
       "amount": 75
     },
     {
       "cdate": "2016-11-14",
-      "expName": "Breakfast",
+      "expense_name": "Breakfast",
       "amount": 55
     }
   ]
