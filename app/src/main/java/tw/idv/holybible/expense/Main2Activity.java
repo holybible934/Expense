@@ -86,6 +86,9 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
     @Override
     public void OnClick(int position, Expense expense) {
         Log.d(TAG, "OnItemClick: " + expense.getExpName() + ", " + expense.getAmount());
+        Intent detail = new Intent(Main2Activity.this, DetailActivity.class);
+        detail.putExtra("EXTRA_EXPENSE", expense);
+        startActivity(detail);
     }
 
     @Override

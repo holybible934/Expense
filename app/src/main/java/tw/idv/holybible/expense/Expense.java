@@ -2,12 +2,14 @@ package tw.idv.holybible.expense;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by chchang on 2017/12/2.
  */
 
-public class Expense {
+public class Expense implements Parcelable {
     int id;
     String cdate;
     String expName;
@@ -41,6 +43,40 @@ public class Expense {
         int agreeFlag = cursor.getInt(cursor.getColumnIndex(ExpenseContract.COL_AGREE));
         this.agree = agreeFlag == 0? false:true;
     }
+
+    protected Expense(Parcel in) {
+        id = in.readInt();
+        cdate = in.readString();
+        expName = in.readString();
+        amount = in.readInt();
+        agree = in.readByte() != 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(cdate);
+        dest.writeString(expName);
+        dest.writeInt(amount);
+        dest.writeInt(agree ? 1 : 0);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Expense> CREATOR = new Creator<Expense>() {
+        @Override
+        public Expense createFromParcel(Parcel in) {
+            return new Expense(in);
+        }
+
+        @Override
+        public Expense[] newArray(int size) {
+            return new Expense[size];
+        }
+    };
 
     public int getId() {
         return id;
