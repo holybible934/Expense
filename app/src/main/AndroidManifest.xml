@@ -16,12 +16,19 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
-            android:authorities="tw.idv.holybible.expense"
-            android:name=".ExpenseProvider" />
+            android:name=".ExpenseProvider"
+            android:authorities="tw.idv.holybible.expense" />
+
+        <activity android:name=".DetailActivity"
+            android:parentActivityName=".Main2Activity">
+
+        </activity>
     </application>
 
 </manifest>
