@@ -62,10 +62,11 @@ public class ExpenseHelper extends SQLiteOpenHelper {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject record = array.getJSONObject(i);
                 values.put("cdate", record.getString("cdate"));
-                values.put("expName", record.getString("expName"));
+                values.put("expense_name", record.getString("expense_name"));
                 values.put("amount", record.getInt("amount"));
+                Log.d(TAG, "readJsonData: record is " + record.toString());
+                db.insert(ExpenseContract.EXPENSE_TABLE, null, values);
             }
-            db.insert(ExpenseContract.EXPENSE_TABLE, null,values);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
