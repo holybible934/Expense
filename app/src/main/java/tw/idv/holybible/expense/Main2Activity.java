@@ -136,4 +136,13 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
     public void onLoaderReset(Loader<Cursor> loader) {
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            Intent intent = new Intent(Main2Activity.this, SettingsActivity.class);
+            startActivity(intent);
+        }
+        return true;
+    }
 }

@@ -33,6 +33,7 @@
             android:name=".ExpenseInsertService"
             android:exported="false" />
 
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>
