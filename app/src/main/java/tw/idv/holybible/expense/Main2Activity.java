@@ -140,7 +140,6 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.w(TAG, "onCreateOptionsMenu: inflate Menu");
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
