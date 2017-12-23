@@ -4,5 +4,6 @@
 
     <item
         android:id="@+id/action_settings"
-        android:title="settings" />
+        android:title="settings"
+        app:showAsAction="withText" />
 </menu>
