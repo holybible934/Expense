@@ -27,11 +27,12 @@
 
         <activity
             android:name=".DetailActivity"
-            android:parentActivityName=".Main2Activity"></activity>
+            android:parentActivityName=".Main2Activity" />
 
         <service
             android:name=".ExpenseInsertService"
-            android:exported="false"></service>
+            android:exported="false" />
+
     </application>
 
 </manifest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="time">
+        <item name="item1">07:00</item>
+        <item name="item2">12:00</item>
+        <item name="item3">15:00</item>
+        <item name="item4">20:00</item>
+    </string-array>
+    <string-array name="time_display">
+        <item name="item1">7:00 AM</item>
+        <item name="item2">12:00 PM</item>
+        <item name="item3">3:00 PM</item>
+        <item name="item4">8:00 PM</item>
+    </string-array>
+</resources>
