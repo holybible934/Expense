@@ -2,6 +2,7 @@ package tw.idv.holybible.expense;
 
 import android.content.ContentUris;
 import android.net.Uri;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,9 +18,13 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_delete) {
-            Uri uri = ContentUris.withAppendedId(ExpenseContract.CONTENT_URI, expense.getId());
-            getContentResolver().delete(uri, null, null);
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+                Uri uri = ContentUris.withAppendedId(ExpenseContract.CONTENT_URI, expense.getId());
+                getContentResolver().delete(uri, null, null);
+                break;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
         }
         return true;
     }
