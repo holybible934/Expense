@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Expense</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main2">My Expense App</string>
     <string name="expense_name">Expense Name</string>
     <string name="amount">Amount</string>
     <string name="date">Date</string>
