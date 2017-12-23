@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="tw.idv.holybible.expense.Main2Activity">
 
     <item
         android:id="@+id/action_settings"
-        android:checkable="false"
         android:orderInCategory="100"
-        android:title="settings"
+        android:title="@string/action_settings"
         app:showAsAction="never" />
 </menu>

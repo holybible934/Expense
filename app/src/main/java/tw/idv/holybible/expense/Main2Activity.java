@@ -16,6 +16,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -138,11 +139,21 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_settings) {
-            Intent intent = new Intent(Main2Activity.this, SettingsActivity.class);
-            startActivity(intent);
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.w(TAG, "onCreateOptionsMenu: inflate Menu");
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Log.w(TAG, "onOptionsItemSelected: item ID is" + id);
+        if (id == R.id.action_settings) {
+            Log.d(TAG, "onOptionsItemSelected: start Setting Activity");
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
