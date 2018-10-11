@@ -34,7 +34,7 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         helper = new ExpenseHelper(this, "expense.db", null, 1);
@@ -54,7 +54,7 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
         }
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +67,7 @@ public class Main2Activity extends AppCompatActivity implements ExpenseAdapter.O
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                return false;
+                return onOptionsItemSelected(item);
             }
         });
     }
