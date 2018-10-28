@@ -33,15 +33,7 @@ public class OnboardActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                case 2:
-                default:
-                    return Page1Fragment.newInstance(position);
-                case 1:
-                case 3:
-                    return Page2Fragment.newInstance(position);
-            }
+            return PageFragment.newInstance(position);
         }
 
         @Override

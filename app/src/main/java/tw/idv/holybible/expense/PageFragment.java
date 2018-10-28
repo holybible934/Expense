@@ -9,16 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class Page2Fragment extends Fragment {
+public class PageFragment extends Fragment {
 
     private int mPosition;
 
-    public Page2Fragment() {
+    public PageFragment() {
 
     }
 
     public static Fragment newInstance(int position) {
-        Page2Fragment fragement = new Page2Fragment();
+        PageFragment fragement = new PageFragment();
         Bundle args = new Bundle();
         args.putInt("position", position);
         fragement.setArguments(args);
@@ -34,7 +34,22 @@ public class Page2Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View page2 = inflater.inflate(R.layout.fragment_page2, container, false);
-        return page2;
+        View page;
+        switch (mPosition) {
+            default:
+            case 0:
+                page = inflater.inflate(R.layout.fragment_page1, container, false);
+                break;
+            case 1:
+                page = inflater.inflate(R.layout.fragment_page2, container, false);
+                break;
+            case 2:
+                page = inflater.inflate(R.layout.fragment_page3, container, false);
+                break;
+            case 3:
+                page = inflater.inflate(R.layout.fragment_page4, container, false);
+                break;
+        }
+        return page;
     }
 }
