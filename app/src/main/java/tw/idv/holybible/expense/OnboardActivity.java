@@ -2,12 +2,14 @@ package tw.idv.holybible.expense;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -21,8 +23,7 @@ public class OnboardActivity extends FragmentActivity {
 
     MyAdapter fragAdapter;
     ViewPager mPager;
-    private ArrayList<ImageView> mDots;
-    private int mFragmentCount = 4;
+    private static ArrayList<ImageView> mDots;
     private LinearLayout mIndicator;
     private FrameLayout mIndicatorsContainer;
 
@@ -39,7 +40,7 @@ public class OnboardActivity extends FragmentActivity {
         mIndicator = (LinearLayout) View.inflate(this, R.layout.indicator, null);
         mIndicatorsContainer.addView(mIndicator);
         mDots = new ArrayList<>();
-        for (int i = 0; i < mFragmentCount; i++) {
+        for (int i = 0; i < ITEMS; i++) {
             ImageView dot = new ImageView(this);
             dot.setImageDrawable(getDrawable(R.drawable.indicator_dot_grey));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -51,16 +52,27 @@ public class OnboardActivity extends FragmentActivity {
         }
     }
 
-    public static class MyAdapter extends FragmentPagerAdapter {
+    public class MyAdapter extends FragmentPagerAdapter {
 
-        public MyAdapter(FragmentManager fm) {
+        MyAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-
             return PageFragment.newInstance(position);
+        }
+
+        @Override
+        public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            for (int i = 0; i < ITEMS; i++) {
+                if (i == position) {
+                    mDots.get(i).setImageDrawable(getDrawable(R.drawable.indicator_dot_red));
+                } else {
+                    mDots.get(i).setImageDrawable(getDrawable(R.drawable.indicator_dot_grey));
+                }
+            }
+            super.setPrimaryItem(container, position, object);
         }
 
         @Override

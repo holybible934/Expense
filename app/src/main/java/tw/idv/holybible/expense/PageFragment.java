@@ -28,7 +28,7 @@ public class PageFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPosition = getArguments() != null ? getArguments().getInt("position") : 2;
+        mPosition = getArguments() != null ? getArguments().getInt("position") : 0;
     }
 
     @Nullable
