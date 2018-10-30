@@ -17,12 +17,12 @@ public class PageFragment extends Fragment {
 
     }
 
-    public static Fragment newInstance(int position) {
-        PageFragment fragement = new PageFragment();
+    static Fragment newInstance(int position) {
+        PageFragment fragment = new PageFragment();
         Bundle args = new Bundle();
         args.putInt("position", position);
-        fragement.setArguments(args);
-        return fragement;
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
